@@ -37,7 +37,7 @@ After trimming the initial low signal (3 to 5 zero's), then the following struct
 |  Sequence Number  |    352-359   |   1 byte   |                           10110010                          |
 |    UNKNOWN/TBD #1 |    360-431   |   9 bytes  |010001111110100100000111001101000000100011000001000000001000000011111111|
 |    UNKNOWN/TBD #2 |    432-439   |   1 byte   |                           11000100                          |
-|     Checksum??    |    440-447   |   1 byte   |                        totally random                       |
+|     Checksum.     |    440-447   |   1 byte   |                         CRC Checksum                        |
 |     Postamble     |    448-465   |   2 bytes  |                     01010101...01010101                     |
 
 ### Preamble
@@ -70,5 +70,15 @@ Some bits and bytes here change by random sometimes per message / message type. 
 The first 3 bits here change every message, seems totally random, the other 5 bits often seem to have some correlation with the 5 repetitions of the request / response. This could very well have something to do with the current absolute state of the remote and the fireplace.
 
 ### Checksum 
-I am almost sure that this part is the message checksum. 
-I cant seem to find how the checksum is being calculated. Need some more research / help here.
+The first byte of the CRC Checksum with the following algorithm: 
+
+Parameters: 
+| Setting      | Value       |
+|--------------|-------------|
+| Range        | 280-439     |
+| Polynomial   | 0x8005      |
+| Start/init   | 0x2e81      |
+| Refin/refout | false/false |
+| xorout       | 0x0000      |
+| residue      | 0x0000      |
+| check        | 0x879d      |
