@@ -34,11 +34,11 @@ After trimming the initial low signal (3 to 5 zero's), then the following struct
 | Sync / device ID? |    280-335   |   7 bytes  | 00000010000000010000000110101000000011101011000111110111000 |
 |    Message type   |    336-343   |   1 byte   |                           00010110                          |
 |       Zero?       |    344-351   |   1 byte   |                           00000000                          |
-|  Sequence Number  |    352-359   |   1 byte   |                           10110010                          |
+|  Sequence Number  |    352-359   |   1 byte   |                    10110010 (or 00000000)                   |
 |    UNKNOWN/TBD #1 |    360-431   |   6 bytes  |        010001111110100100000111001101000000100011000001     |
 |        LOW        |    408-415   |   1 byte   |                           00000000                          |
 |    UNKNOWN/TBD #2 |    416-423   |   1 byte   |                           10000000                          |
-|        HIGH       |    424-431   |   1 byte   |                           11111111                          |
+|     Participant   |    424-431   |   1 byte   |                           11111111                          |
 |    UNKNOWN/TBD #3 |    432-439   |   1 byte   |                           11000100                          |
 |     Checksum.     |    440-447   |   1 byte   |                         CRC Checksum                        |
 |     Postamble     |    448-465   |   2 bytes  |                     01010101...01010101                     |
@@ -64,13 +64,21 @@ I assume that this part identifies the devices, both the remote and the fireplac
 This part seems to always be zero - could be a return code / error code byte, or something else?
 
 ### Sequence number
-This is a ever incremental/looping sequence number, each instance of the message, even when its repeated, has an increment of 1
+This is a ever incremental/looping sequence number, each instance of the message, even when its repeated, has an increment of 1.
+It is ONLY used by the remote. The fireplace always sends 0x00
 
 ### Unknown / TBD #1
 Some bits and bytes here change by random sometimes per message / message type. But most is very steady. I think that most of this information represents the current absolute state. More research is necesarry.
 
+### Low
+Always zero / unused
+
 ### Unknown / TBD #2
 Very steady, only first 2 bits seem to change sometimes..
+
+### Participant
+0xff = Remote control
+0x00 = Fireplace/gas-unit
 
 ### Unknown / TBD #3
 The first 3 bits here change every message, seems totally random, the other 5 bits often seem to have some correlation with the 5 repetitions of the request / response. This could very well have something to do with the current absolute state of the remote and the fireplace.
