@@ -38,9 +38,8 @@ After trimming the initial low signal (3 to 5 zero's), then the following struct
 |    UNKNOWN/TBD #1 |    360-431   |   6 bytes  |        010001111110100100000111001101000000100011000001     |
 |        LOW        |    408-415   |   1 byte   |                           00000000                          |
 |    UNKNOWN/TBD #2 |    416-423   |   1 byte   |                           10000000                          |
-|     Participant   |    424-431   |   1 byte   |                           11111111                          |
-|    UNKNOWN/TBD #3 |    432-439   |   1 byte   |                           11000100                          |
-|     Checksum.     |    440-447   |   1 byte   |                         CRC Checksum                        |
+|     Participant   |    424-431   |   1 byte   |                    11111111 (or 00000000)                   |
+|     Checksum.     |    432-447   |   2 bytes  |                         CRC Checksum                        |
 |     Postamble     |    448-465   |   2 bytes  |                     01010101...01010101                     |
 
 ### Preamble
@@ -80,16 +79,13 @@ Very steady, only first 2 bits seem to change sometimes..
 0xff = Remote control
 0x00 = Fireplace/gas-unit
 
-### Unknown / TBD #3
-The first 3 bits here change every message, seems totally random, the other 5 bits often seem to have some correlation with the 5 repetitions of the request / response. This could very well have something to do with the current absolute state of the remote and the fireplace.
-
 ### Checksum 
-The first byte of the CRC Checksum with the following algorithm: 
+CRC Checksum with the following algorithm: 
 
 Parameters: 
 | Setting      | Value       |
 |--------------|-------------|
-| Range        | 280-439     |
+| Range        | 280-431     |
 | Polynomial   | 0x8005      |
 | Start/init   | 0x2e81      |
 | Refin/refout | false/false |
