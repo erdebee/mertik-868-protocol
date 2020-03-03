@@ -10,22 +10,6 @@ European version
 Freq. 868.1 Mhz
 Product Nr. B6R-H8TV21PBD
 
-### How can I help?
-
-If you're able to run [rtl_433](https://github.com/merbanan/rtl_433), and have access
-to one of these devices, I'd like to know which device you have and what 48-bit value 
-you receive from your device.
-
-Using a recent build of rtl_433, here's what you can use to get that value.
-
-North American and Australian devices:
-
-	rtl_433 -f 916800000 -q -R 0 -X n=Honeywell_ActivLink,m=FSK_PWM,s=160,l=320,r=400,y=480,invert,bits=48
-
-European devices (including Friedland Response and Libra+ devices):
-
-	rtl_433 -f 868300000 -q -R 0 -X n=Honeywell_ActivLink,m=FSK_PWM,s=160,l=320,r=400,y=480,invert,bits=48
-
 ## Signal interpretation
 In Ultimate Radio Hacker, the following settings lead to a correct interpretation of the signals:
 
