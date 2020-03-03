@@ -22,8 +22,7 @@ Fault tolerance: 5
 Bits: 1 ( Plain FSK )
 
 ## Behaviour
-First 5 times the command is being sent with ~50ms intervals
-Then seemingly a response is being sent with an "ACK" message type. There is however no participant ID showing that this is actually a response
+There are 2 sets of 5 messages, from the remote. Somewhere in between, the fireplace sends a response, and the  remote then always replies another 5 times with some kind of ACK message.
 
 ## Protocol
 After trimming the initial low signal (3 to 5 zero's), then the following structure is found in every message:
