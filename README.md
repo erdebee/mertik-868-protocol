@@ -17,7 +17,7 @@ Frequency: 868.0MHz
 Modulation: FSK (Actually its GFSK, but FSK works the same in URH)
 Noise 0,08
 Center 0,25 (sometimes a little lower or higher, should be in the middle of the preamble signal freq.)
-Samples per symbol: 62 (at 2MSps / 2MHz = 31 nanoseconds per symbol)
+Samples per symbol: 62 (at 2MSps / 2MHz = 31 microseconds per symbol, 32258 Baud)
 Fault tolerance: 5
 Bits: 1 ( Plain FSK )
 
