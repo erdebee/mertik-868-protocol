@@ -66,7 +66,9 @@ This is a ever incremental/looping sequence number, each instance of the message
 It is ONLY used by the remote. The fireplace always sends 0x00
 
 ### Unknown / TBD #1
-Some bits and bytes here change by random sometimes per message / message type. But most is very steady. I think that most of this information represents the current absolute state. More research is necesarry.
+The first bytes here seem to represent the current temperature in fahrenheit that the remote is measuring.
+Some other bits and bytes here change by random sometimes per message / message type. But most is very steady. 
+I think that most of this information represents some of the current absolute state. More research is necesarry.
 
 ### Low
 Always zero / unused
